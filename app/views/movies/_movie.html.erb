@@ -1,0 +1,10 @@
+<div class="card mt-4">
+  <%= image_tag movie.image_url, size: "300x450", class: "card-img-top", alt: movie.title %>
+  <div class="card-body">
+    <h5 class="card-title"><%= "#{movie.title} (#{movie.release_year})" %></h5>
+    <div class="card-text">Director: <%= movie.director %></div>
+    <div class="card-text">Genre: <%= movie.genre %></div>
+    <hr>
+    <p class="card-text"><%= movie.description %></p>
+  </div>
+</div>
