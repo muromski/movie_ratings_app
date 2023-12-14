@@ -1,0 +1,37 @@
+<div id="<%= dom_id review %>">
+  <div class="card mb-3">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <%= link_to review.movie, class: 'text-decoration-none' do %>
+          <%= image_tag review.movie.image_url, class: 'img-fluid rounded-start', size: "100x150" %>
+        <% end %>
+      </div>
+      <div class="col-md-8">
+        <turbo-frame id="current-user-review">
+          <div class="card-body">
+          <%= link_to review.movie, class: 'text-decoration-none' do %>
+            <h5 class="card-title"><%= review.movie.title %></h5>
+          <% end %>
+            <div class="d-flex justify-content-between">
+              <%= render 'shared/stars', value: review.rating %>
+              <% if review.user.id == 1%>
+              <div class="d-flex align-items-center">
+                <%= link_to edit_review_path(review), class: 'text-dark me-3', data: { 'turbo-stream': '' } do %>
+                  <i class="bi bi-pencil-fill fs-4"></i>
+                <% end %>
+
+                <%= link_to review_path(review), method: :delete, class: 'text-danger', data: { 'turbo-frame': '' } do %>
+                  <i class="bi bi-trash-fill fs-4"></i>
+                <% end %>
+              </div>
+              <% end %>
+            </div>
+            <div>
+              <%= review.comment %>
+            </div>
+          </div>
+        </turbo-frame>
+      </div>
+    </div>
+  </div>
+</div>

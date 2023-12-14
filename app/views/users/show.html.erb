@@ -1,0 +1,20 @@
+<%= turbo_stream_from @user %>
+
+<div class="user_info">
+  <h1><%= @user.nickname %></h1>
+  <%= image_tag @user.avatar_url, size: "300x450", alt: @user.nickname %>
+  <div>
+    <span>About user:</span>
+    <%= @user.about %>
+  </div>
+    <hr>
+  <h2 class="text-center">User reviews</h2>
+
+  <div id="user-reviews">
+  <% @user.reviews.each do |review| %>
+    <%= render 'users/review', review: review %>
+  <% end %>
+</div>
+</div>
+</div>
+

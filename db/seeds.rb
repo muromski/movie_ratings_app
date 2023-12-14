@@ -1,13 +1,4 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
-
+# Generate movies
 movies_data = [
   { title: "Inception", director: "Christopher Nolan", release_year: 2010, genre: "Sci-Fi", image_url: "inception.jpeg", description: "A mind-bending thriller that explores the concept of dreams within dreams, challenging the boundaries of reality and perception. Dom Cobb, played by Leonardo DiCaprio, is a skilled thief who specializes in entering people's dreams to steal their deepest secrets." },
   { title: "The Shawshank Redemption", director: "Frank Darabont", release_year: 1994, genre: "Drama", image_url: "the_shawshank_redemption.jpeg", description: "A timeless tale of hope and redemption set within the confines of Shawshank State Penitentiary. Andy Dufresne, played by Tim Robbins, forms an unlikely friendship with fellow inmate Red, portrayed by Morgan Freeman, as they navigate the challenges of prison life." },
@@ -25,11 +16,31 @@ movies_data.each do |movie|
   Movie.create!(movie)
 end
 
+# Generate users
 5.times do |i|
   User.create!(
     nickname: "User##{i + 1}",
-    about: Faker::Lorem.sentence,
+    about: "Hi there, fellow movie enthusiasts! When I'm not lost in the magical world of films, you can find me passionately debating the finest details of cinematography or recommending hidden gems. My favorite movie? That's a tough one, but I have a soft spot for mind-bending sci-fi. Let's share our cinematic adventures together!",
     avatar_url: "user_#{i}_avatar"
   )
+end
+
+# Generate reviews
+user_ids = (2..5).to_a # 1 is id for your current user
+
+user_ids.each do |user_id|
+  movie_ids = (1..10).to_a
+
+  3.times do
+    movie_id = movie_ids.sample
+    movie_ids.delete(movie_id)
+
+    Review.create(
+      user_id: user_id,
+      movie_id: movie_id,
+      rating: 5,
+      comment: "This is a great movie! I enjoyed every moment of it. The storyline is captivating, the characters are well-developed, and the cinematography is excellent. Highly recommended."
+    )
+  end
 end
 

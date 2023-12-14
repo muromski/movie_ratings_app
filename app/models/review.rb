@@ -6,6 +6,8 @@ class Review < ApplicationRecord
     less_than_or_equal_to: 5 }
   validates :user_id, uniqueness: { scope: :movie_id }
 
+  broadcasts_to ->(review) { review.user }, inserts_by: :prepend, target: 'user-reviews', partial: 'users/review'
   broadcasts_to ->(review) { review.movie }, inserts_by: :prepend, target: 'reviews'
+
   after_commit -> { movie.update_rating }
 end
