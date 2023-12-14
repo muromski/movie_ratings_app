@@ -1,5 +1,11 @@
 <%= turbo_stream_from 'movies' %>
 
+<%= simple_form_for :search, url: movies_path, method: :get, html: { class: 'form-inline' }, data: { controller: "movie-search", turbo_frame: "movies", turbo_action: "advance" } do |form| %>
+  <%= form.label :query, "Search by title or director:" %>
+  <%= form.text_field :query, data: { action: "input->movie-search#search" } %>
+<% end %>
+
+<%= turbo_frame_tag "movies" do %>
 <div class="movies">
   <div class="container text-center">
     <h1 class="mx-auto">Movies list</h1>
@@ -16,3 +22,4 @@
     </div>
   </div>
 </div>
+<% end %>

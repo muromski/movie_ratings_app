@@ -1,6 +1,12 @@
 class MoviesController < ApplicationController
   def index
-    @movies = Movie.order(title: :asc)
+    query = params.dig("search", "query")
+
+    @movies = if query
+      Movie.where("title ILIKE ? OR director ILIKE ?", "%#{query}%", "%#{query}%").order(title: :asc)
+    else
+      Movie.order(title: :asc)
+    end
   end
 
   def show

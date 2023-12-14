@@ -4,5 +4,7 @@
 
 import { application } from "./application"
 import StarsController from "./stars_controller"
+import MovieSearchController from "./movie_search_controller"
 
 application.register("stars", StarsController)
+application.register("movie-search", MovieSearchController)

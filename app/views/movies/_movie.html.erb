@@ -1,19 +1,21 @@
-<div class="card mt-4">
-  <%= image_tag movie.image_url, size: "300x450", class: "card-img-top", alt: movie.title %>
-  <div class="card-body">
-    <div class="row">
-      <div class="col-md-6">
-        <h5 class="card-title"><%= "#{movie.title} (#{movie.release_year})" %></h5>
-      </div>
-      <div class="col-md-6 text-right">
-        <div class="ratings-container">
-          <%= render 'movie_rating', movie: movie %>
+<div id="<%= dom_id movie %>">
+  <div class="card mt-4">
+    <%= image_tag movie.image_url, size: "300x450", class: "card-img-top", alt: movie.title %>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <h5 class="card-title"><%= "#{movie.title} (#{movie.release_year})" %></h5>
+        </div>
+        <div class="col-md-6 text-right">
+          <div class="ratings-container">
+            <%= render 'movie_rating', movie: movie %>
+          </div>
         </div>
       </div>
+      <div class="card-text">Director: <%= movie.director %></div>
+      <div class="card-text">Genre: <%= movie.genre %></div>
+      <hr>
+      <p class="card-text"><%= movie.description %></p>
     </div>
-    <div class="card-text">Director: <%= movie.director %></div>
-    <div class="card-text">Genre: <%= movie.genre %></div>
-    <hr>
-    <p class="card-text"><%= movie.description %></p>
   </div>
 </div>
