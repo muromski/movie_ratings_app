@@ -1,0 +1,13 @@
+<% stars = (value.to_f * 2).round / 2 %>
+
+<div class="stars-row">
+  <% 5.times do |idx| %>
+    <% if stars.floor > idx %>
+      <div class="star full-star"></div>
+    <% elsif stars.ceil == idx && stars.ceil != stars.floor %>
+      <div class="star half-star"></div>
+    <% else %>
+      <div class="star"></div>
+    <% end %>
+  <% end %>
+</div>

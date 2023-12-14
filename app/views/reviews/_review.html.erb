@@ -1,0 +1,14 @@
+<div class="card" id="<%= dom_id review %>">
+  <div class="card-body">
+    <div>
+      <%= render 'shared/stars', value: review.rating %>
+      <%= review.user.nickname %>
+      <span class="small">
+        <%= review.created_at.strftime('%Y-%m-%d %H:%M') %>
+      </span>
+    </div>
+    <% if review.comment.present? %>
+      <div><%= review.comment %></div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+<h4>Left your review</h4>
+
+<% if review.id.nil? %>
+  <%= render 'reviews/form', review: review %>
+<% else %>
+  <%= render 'reviews/show', review: review %>
+<% end %>

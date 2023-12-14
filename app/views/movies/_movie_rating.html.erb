@@ -1,0 +1,13 @@
+<turbo-frame id="movie-full-rating">
+  <div class="d-flex gap-3 align-items-center">
+    <div class="row">
+        <%= render 'shared/stars', value: movie.rating %>
+
+        <% unless movie.reviews_count.zero? %>
+          <div>
+            (<%= movie.rating %> from <%= pluralize(movie.reviews_count, 'review') %>)
+          </div>
+        <% end %>
+    </div>
+  </div>
+</turbo-frame>

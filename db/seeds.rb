@@ -25,3 +25,11 @@ movies_data.each do |movie|
   Movie.create!(movie)
 end
 
+5.times do |i|
+  User.create!(
+    nickname: "User##{i + 1}",
+    about: Faker::Lorem.sentence,
+    avatar_url: "user_#{i}_avatar"
+  )
+end
+

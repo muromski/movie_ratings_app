@@ -1,0 +1,17 @@
+<turbo-frame id="current-user-review">
+  <div class="card">
+    <div class="card-body">
+      <%= simple_form_for review do |f| %>
+        <%= f.hidden_field :movie_id, value: review.movie_id %>
+        <div class="mb-3">
+          <div class="stars-input" data-controller="stars">
+            <%= f.hidden_field :rating, data: { 'stars-target': 'input' } %>
+          </div>
+          <%= f.submit "Submit" %>
+        </div>
+        <%= f.text_area :comment %>
+      <% end %>
+    </div>
+  </div>
+</turbo-frame>
+
