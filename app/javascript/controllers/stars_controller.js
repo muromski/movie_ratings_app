@@ -6,21 +6,6 @@ export default class extends Controller {
   connect() {
     this.currentRating = this.inputTarget.value || 0;
     this.hoveredRating = 0;
-
-    const starsContainer = document.createElement("div");
-    starsContainer.classList.add("stars-row");
-    starsContainer.setAttribute("data-action", "mouseout->stars#ratingHoveredOut");
-
-    for (let i = 1; i <= 5; i++) {
-      const star = document.createElement("div");
-      star.classList.add("star");
-      star.setAttribute("data-stars-target", "star");
-      star.setAttribute("data-action", `mouseover->stars#starHovered click->stars#starClicked`);
-      star.dataset.starValue = i;
-      starsContainer.append(star);
-    }
-
-    this.inputTarget.parentNode.insertBefore(starsContainer, this.inputTarget.nextSibling);
     this.renderRating();
   }
 

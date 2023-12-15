@@ -3,11 +3,15 @@
     <div class="card-body d-flex flex-column">
       <%= simple_form_for review do |f| %>
         <%= f.hidden_field :movie_id, value: review.movie_id %>
-
         <div class="mb-3">
-          <div class="stars-input" data-controller="stars" data-target="stars.input">
-            <%= f.hidden_field :rating, data: { 'stars-target': 'input' } %>
-          </div>
+            <div class="stars-row" data-action="mouseout->stars#ratingHoveredOut" data-controller="stars" data-target="stars.starsContainer">
+              <input type="hidden" name="review[rating]" data-stars-target="input">
+              <div class="star" data-stars-target="star" data-action="mouseover->stars#starHovered click->stars#starClicked" data-star-value="1"></div>
+              <div class="star" data-stars-target="star" data-action="mouseover->stars#starHovered click->stars#starClicked" data-star-value="2"></div>
+              <div class="star" data-stars-target="star" data-action="mouseover->stars#starHovered click->stars#starClicked" data-star-value="3"></div>
+              <div class="star" data-stars-target="star" data-action="mouseover->stars#starHovered click->stars#starClicked" data-star-value="4"></div>
+              <div class="star" data-stars-target="star" data-action="mouseover->stars#starHovered click->stars#starClicked" data-star-value="5"></div>
+            </div>
         </div>
 
         <%= f.text_area :comment, class: "form-control", rows: 4, placeholder: "Your review..." %>
