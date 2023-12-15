@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 class ReviewsController < ApplicationController
-  before_action :find_review, except: :create
+  before_action :set_review, except: :create
 
   def create
     @review = build_review
-    save_review_and_render_partial('show')
+    @review.save
+    render_review_partial('show')
   end
 
   def edit
@@ -13,11 +14,15 @@ class ReviewsController < ApplicationController
   end
 
   def update
-    update_review_and_render('show')
+    @review.update(review_params)
+    render_review_partial('show')
   end
 
   def destroy
-    destroy_review_and_render_form_partial
+    movie_id = @review.movie.id
+    @review.destroy
+    @review = Review.new(movie_id:)
+    render_review_partial('form')
   end
 
   private
@@ -26,31 +31,14 @@ class ReviewsController < ApplicationController
     params.require(:review).permit(:movie_id, :rating, :comment)
   end
 
-  def find_review
+  def set_review
     @review = Review.find(params[:id])
   end
 
   def build_review
     review = Review.new(review_params)
-    review.user = User.find_by_id(1)
+    review.user = current_user
     review
-  end
-
-  def save_review_and_render_partial(partial)
-    @review.save
-    render_review_partial(partial)
-  end
-
-  def update_review_and_render(partial)
-    @review.update(review_params)
-    render_review_partial(partial)
-  end
-
-  def destroy_review_and_render_form_partial
-    movie_id = @review.movie.id
-    @review.destroy
-    @review = Review.new(movie_id: movie_id)
-    render_review_partial('form')
   end
 
   def render_review_partial(partial)
