@@ -1,25 +1,28 @@
 <%= turbo_stream_from 'movies' %>
 
-<%= simple_form_for :search, url: movies_path, method: :get, html: { class: 'form-inline' }, data: { controller: "movie-search", turbo_frame: "movies", turbo_action: "advance" } do |form| %>
-  <%= form.label :query, "Search by title or director:" %>
-  <%= form.text_field :query, data: { action: "input->movie-search#search" } %>
-<% end %>
+<div class="container text-center mt-4">
+  <%= simple_form_for :search, url: movies_path, method: :get, html: { class: 'form-inline' }, data: { controller: "movie-search", turbo_frame: "movies", turbo_action: "advance" } do |form| %>
+    <div class="input-group">
+      <%= form.label :query, "Search by title or director:", class: "visually-hidden" %>
+      <%= form.text_field :query, class: 'form-control', placeholder: 'Search...', data: { action: "input->movie-search#search" } %>
+      <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+  <% end %>
+</div>
 
 <%= turbo_frame_tag "movies" do %>
-<div class="movies">
-  <div class="container text-center">
-    <h1 class="mx-auto">Movies list</h1>
-  </div>
-  <div class="container">
-    <div class="row">
-      <% @movies.each do |movie| %>
-        <div class="col-6 col-md-4 col-lg-3 col-xxl-2">
-          <%= link_to movie, class: 'text-decoration-none', data: { turbo_frame: '_top' } do %>
-            <%= render 'movie', movie: movie %>
-          <% end %>
-        </div>
-      <% end %>
+  <div class="movies">
+    <div class="container">
+      <h1 class="text-center my-4">Movies List</h1>
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4">
+        <% @movies.each do |movie| %>
+          <div class="col">
+            <%= link_to movie, class: 'text-decoration-none', data: { turbo_frame: '_top' } do %>
+              <%= render 'movie', movie: movie %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
-</div>
 <% end %>

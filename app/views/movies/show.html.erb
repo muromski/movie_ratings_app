@@ -1,27 +1,36 @@
 <%= turbo_stream_from @movie %>
 <div class="movie_info">
-  <h1><%= @movie.title %></h1>
-  <%= image_tag @movie.image_url, size: "300x450", alt: @movie.title %>
-  <div>
-    <span>Release year:</span>
-    <%= @movie.release_year %>
+<div class="row">
+  <div class="col-md-4">
+    <%= image_tag @movie.image_url, size: "400x550", alt: @movie.title, class: "img-fluid rounded" %>
   </div>
-  <div>
-    <span>Director:</span>
-    <%= @movie.director %>
+  <div class="col-md-8">
+  <h1 class="mb-4"><%= @movie.title %></h1>
+  <%= render 'movie_rating', movie: @movie %>
+  <div class="info-item mt-3">
+    <b class="info-label text-muted">Release year:</b>
+    <span class="info-value"><%= @movie.release_year %></span>
   </div>
-  <div>
-    <span>Genre:</span>
-    <%= @movie.genre %>
+  <div class="info-item mt-1">
+    <b class="info-label text-muted">Director:</b>
+    <span class="info-value"><%= @movie.director %></span>
   </div>
-  <div>
-    <span>Description:</span>
-    <%= @movie.description %>
+  <div class="info-item mt-1">
+    <b class="info-label text-muted">Genre:</b>
+    <span class="info-value"><%= @movie.genre %></span>
   </div>
-    <%= render 'movie_rating', movie: @movie %>
-    <hr>
+  <div class="info-item mt-1">
+    <b class="info-label text-muted">Description:</b>
+    <span class="info-value"><%= @movie.description %></span>
+  </div>
+</div>
+
+</div>
+
+<div class="mt-5">
     <%= render 'reviews/current_user_review', review: @current_user_review %>
-    <h4 class="mt-3">User reviews</h4>
+    </div>
+    <h1 class="mt-5">User reviews</h1>
     <div id="reviews">
       <% if @movie.reviews.present? %>
         <%= render partial: 'reviews/review', collection: @movie.reviews, as: :review %>

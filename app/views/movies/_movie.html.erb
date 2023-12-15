@@ -4,9 +4,9 @@
     <div class="card-body">
       <div class="row">
         <div class="col-md-6">
-          <h5 class="card-title"><%= "#{movie.title} (#{movie.release_year})" %></h5>
+          <h5 class="card-title text-muted mb-3"><%= "#{movie.title} (#{movie.release_year})" %></h5>
         </div>
-        <div class="col-md-6 text-right">
+        <div class="col-md-6 text-md-end">
           <div class="ratings-container">
             <%= render 'movie_rating', movie: movie %>
           </div>
@@ -14,7 +14,7 @@
       </div>
       <div class="card-text">Director: <%= movie.director %></div>
       <div class="card-text">Genre: <%= movie.genre %></div>
-      <hr>
+      <hr class="my-3">
       <p class="card-text"><%= movie.description %></p>
     </div>
   </div>

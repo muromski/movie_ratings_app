@@ -5,7 +5,7 @@
 
         <% unless movie.reviews_count.zero? %>
           <div>
-            (<%= movie.rating %> from <%= pluralize(movie.reviews_count, 'review') %>)
+            (<%= movie.rating.round(2) %> from <%= pluralize(movie.reviews_count, 'review') %>)
           </div>
         <% end %>
     </div>

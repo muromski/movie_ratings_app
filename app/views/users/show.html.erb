@@ -1,20 +1,23 @@
 <%= turbo_stream_from @user %>
 
-<div class="user_info">
-  <h1><%= @user.nickname %></h1>
-  <%= image_tag @user.avatar_url, size: "300x450", alt: @user.nickname %>
-  <div>
-    <span>About user:</span>
-    <%= @user.about %>
+<div class="user-info-container">
+  <div class="user-info-header">
+    <%= image_tag @user.avatar_url, size: "300x310", alt: @user.nickname, class: "avatar" %>
+    <div class="user-details">
+      <h1 class="nickname"><%= @user.nickname %></h1>
+      <div class="about-info">
+        <%= @user.about %>
+      </div>
+    </div>
   </div>
-    <hr>
+  <hr class="divider">
   <h2 class="text-center">User reviews</h2>
 
   <div id="user-reviews">
-  <% @user.reviews.each do |review| %>
-    <%= render 'users/review', review: review %>
-  <% end %>
+    <% @user.reviews.each do |review| %>
+      <%= render 'users/review', review: review %>
+    <% end %>
+  </div>
 </div>
-</div>
-</div>
+
 

@@ -20,7 +20,7 @@ export default class extends Controller {
       starsContainer.append(star);
     }
 
-    this.inputTarget.after(starsContainer);
+    this.inputTarget.parentNode.insertBefore(starsContainer, this.inputTarget.nextSibling);
     this.renderRating();
   }
 
@@ -35,6 +35,9 @@ export default class extends Controller {
     this.starTargets.forEach((star, index) => {
       star.classList.toggle('active', index + 1 <= rating);
     });
+
+    const submitButton = this.inputTarget.form.querySelector("[type=submit]");
+    submitButton.disabled = rating === 0;
   }
 
   starHovered(event) {
@@ -47,5 +50,4 @@ export default class extends Controller {
     this.inputTarget.value = this.currentRating;
     this.renderRating();
   }
-
 }

@@ -1,14 +1,39 @@
 <div class="card" id="<%= dom_id review %>">
-  <div class="card-body">
-    <div>
-      <%= render 'shared/stars', value: review.rating %>
-      <%= link_to review.user.nickname, user_path(review.user) %>
-      <span class="small">
-        <%= review.created_at.strftime('%Y-%m-%d %H:%M') %>
-      </span>
+    <div class="card-body">
+      <div class="d-flex justify-content-between">
+        <div class="d-flex align-items-center">
+          <%= link_to user_path(review.user), class: 'd-flex align-items-center me-3 text-decoration-none text-dark' do %>
+            <%= image_tag(review.user.avatar_url, class: 'avatar rounded-circle me-2', size: '130x130') %>
+          <% end %>
+          <div class="d-flex flex-column">
+            <div class="mb-2">
+            <%= link_to user_path(review.user), class: 'd-flex align-items-center me-3 text-decoration-none text-dark' do %>
+              <h4><%= review.user.nickname %></h4>
+              <% end %>
+            </div>
+            <div>
+              <%= render 'shared/stars', value: review.rating %>
+            </div>
+            <div class="mb-2">
+              <%= review.comment %>
+            </div>
+            <div class="text-muted small">
+              <%= review.created_at.strftime('%Y-%m-%d %H:%M') %>
+            </div>
+          </div>
+        </div>
+        <div class="icons-container ms-3">
+          <div class="d-flex align-items-center">
+            <% if review.user.id == 1 %>
+              <%= link_to edit_review_path(review), class: 'btn btn-primary me-3', data: { 'turbo-stream': '' } do %>
+                <i class="bi bi-pencil"></i>
+              <% end %>
+              <%= button_to review_path(review), method: :delete, class: 'btn btn-danger' do %>
+                <i class="bi bi-trash"></i>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
     </div>
-    <% if review.comment.present? %>
-      <div><%= review.comment %></div>
-    <% end %>
-  </div>
 </div>

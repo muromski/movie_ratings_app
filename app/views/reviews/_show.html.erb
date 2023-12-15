@@ -2,19 +2,35 @@
   <div class="card">
     <div class="card-body">
       <div class="d-flex justify-content-between">
-        <%= render 'shared/stars', value: review.rating %>
-                  <div class="d-flex align-items-center">
-                    <%= link_to edit_review_path(review), class: 'text-dark me-3', data: { 'turbo-stream': '' } do %>
-                      <i class="bi bi-pencil-fill fs-4"></i>
-                    <% end %>
-
-                    <%= link_to review_path(review), method: :delete, class: 'text-danger', data: { 'turbo-frame': '' } do %>
-                      <i class="bi bi-trash-fill fs-4"></i>
-                    <% end %>
-                  </div>
-      </div>
-      <div>
-        <%= review.comment %>
+        <div class="d-flex align-items-center">
+          <%= link_to '/users/1', class: 'd-flex align-items-center me-3', data: { turbo_frame: '_top' } do %>
+            <%= image_tag('user_0_avatar.jpg', class: 'avatar rounded-circle me-2', size: '130x130') %>
+          <% end %>
+          <div class="d-flex flex-column">
+            <div class="mb-2">
+              <h4>User#1</h4>
+            </div>
+            <div>
+              <%= render 'shared/stars', value: review.rating %>
+            </div>
+            <div class="mb-2">
+              <%= review.comment %>
+            </div>
+            <div class="text-muted small">
+              <%= review.created_at.strftime('%Y-%m-%d %H:%M') %>
+            </div>
+          </div>
+        </div>
+        <div class="icons-container ms-3">
+          <div class="d-flex align-items-center">
+                  <%= link_to edit_review_path(review), class: 'btn btn-primary me-3', data: { 'turbo-stream': '' } do %>
+                    <i class="bi bi-pencil"></i>
+                  <% end %>
+                  <%= button_to review_path(review), method: :delete, class: 'btn btn-danger' do %>
+                    <i class="bi bi-trash"></i>
+                  <% end %>
+          </div>
+        </div>
       </div>
     </div>
   </div>

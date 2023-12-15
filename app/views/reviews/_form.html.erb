@@ -1,17 +1,21 @@
-<turbo-frame id="current-user-review">
+<turbo-frame id="current-user-review" data-controller="stars" data-target="stars">
   <div class="card">
-    <div class="card-body">
+    <div class="card-body d-flex flex-column">
       <%= simple_form_for review do |f| %>
         <%= f.hidden_field :movie_id, value: review.movie_id %>
+
         <div class="mb-3">
-          <div class="stars-input" data-controller="stars">
+          <div class="stars-input" data-controller="stars" data-target="stars.input">
             <%= f.hidden_field :rating, data: { 'stars-target': 'input' } %>
           </div>
-          <%= f.submit "Submit" %>
         </div>
-        <%= f.text_area :comment %>
+
+        <%= f.text_area :comment, class: "form-control", rows: 4, placeholder: "Your review..." %>
+
+        <div class="mt-3 d-flex justify-content-end align-items-end">
+          <%= f.submit "Submit", class: "btn btn-primary", data: { 'target': 'stars.submitButton', 'disable-with': 'Submitting...' } %>
+        </div>
       <% end %>
     </div>
   </div>
 </turbo-frame>
-
