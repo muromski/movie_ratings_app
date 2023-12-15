@@ -1,39 +1,42 @@
 <%= turbo_stream_from @movie %>
-<div class="movie_info">
-<div class="row">
-  <div class="col-md-4">
-    <%= image_tag @movie.image_url, size: "400x550", alt: @movie.title, class: "img-fluid rounded" %>
-  </div>
-  <div class="col-md-8">
-  <h1 class="mb-4"><%= @movie.title %></h1>
-  <%= render 'movie_rating', movie: @movie %>
-  <div class="info-item mt-3">
-    <b class="info-label text-muted">Release year:</b>
-    <span class="info-value"><%= @movie.release_year %></span>
-  </div>
-  <div class="info-item mt-1">
-    <b class="info-label text-muted">Director:</b>
-    <span class="info-value"><%= @movie.director %></span>
-  </div>
-  <div class="info-item mt-1">
-    <b class="info-label text-muted">Genre:</b>
-    <span class="info-value"><%= @movie.genre %></span>
-  </div>
-  <div class="info-item mt-1">
-    <b class="info-label text-muted">Description:</b>
-    <span class="info-value"><%= @movie.description %></span>
-  </div>
-</div>
 
-</div>
-
-<div class="mt-5">
-    <%= render 'reviews/current_user_review', review: @current_user_review %>
+<div class="container mt-4 mb-4">
+  <div class="movie_info">
+    <div class="row">
+      <div class="col-md-4">
+        <%= image_tag @movie.image_url, size: "400x550", alt: @movie.title, class: "img-fluid rounded" %>
+      </div>
+      <div class="col-md-8">
+        <h1 class="mb-4"><%= @movie.title %></h1>
+        <%= render 'movie_rating', movie: @movie %>
+        <div class="info-item mt-3">
+          <b class="info-label text-muted">Release year:</b>
+          <span class="info-value"><%= @movie.release_year %></span>
+        </div>
+        <div class="info-item mt-1">
+          <b class="info-label text-muted">Director:</b>
+          <span class="info-value"><%= @movie.director %></span>
+        </div>
+        <div class="info-item mt-1">
+          <b class="info-label text-muted">Genre:</b>
+          <span class="info-value"><%= @movie.genre %></span>
+        </div>
+        <div class="info-item mt-1">
+          <b class="info-label text-muted">Description:</b>
+          <span class="info-value"><%= @movie.description %></span>
+        </div>
+      </div>
     </div>
+
+    <div class="mt-5">
+      <%= render 'reviews/current_user_review', review: @current_user_review %>
+    </div>
+
     <h1 class="mt-5">User reviews</h1>
     <div id="reviews">
       <% if @movie.reviews.present? %>
         <%= render partial: 'reviews/review', collection: @movie.reviews, as: :review %>
       <% end %>
     </div>
+  </div>
 </div>

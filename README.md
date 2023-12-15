@@ -24,9 +24,11 @@ Add a basic search function to find movies by title or director. Utilize Stimulu
 
 
 ### Setup
-1. Clone the repo
-2. Run `bundle install`
-3. Run `rails db:create db:migrate db:seed`
-4. Run `yarn install`
-5. Start app via `bin/dev`
+1. Clone the repo `git clone git@github.com:muromski/movie_ratings_app.git`
+2. Configure `database.yml` file according to your credentials
+3. Run services `postgresql` and `redis` on your device
+4. Run `bundle install`
+5. Run `rails db:create db:migrate db:seed`
+6. Run `yarn install`
+7. Start app via `bin/dev`
 
