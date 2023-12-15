@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 class MoviesController < ApplicationController
   def index
-    query = params.dig("search", "query")
+    query = params.dig('search', 'query')
 
     @movies = if query
-      Movie.where("title ILIKE ? OR director ILIKE ?", "%#{query}%", "%#{query}%").order(title: :asc)
-    else
-      Movie.order(title: :asc)
-    end
+                Movie.where('title ILIKE ? OR director ILIKE ?', "%#{query}%", "%#{query}%").order(title: :asc)
+              else
+                Movie.order(title: :asc)
+              end
   end
 
   def show

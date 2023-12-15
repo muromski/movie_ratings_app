@@ -1,30 +1,23 @@
+# frozen_string_literal: true
+
 class ReviewsController < ApplicationController
   before_action :find_review, except: :create
 
   def create
-    @review = Review.new(review_params)
-    @review.user = User.find_by_id(1)
-    @review.save
-
-    render_review_turbo_partial('show')
+    @review = build_review
+    save_review_and_render_partial('show')
   end
 
   def edit
-    render_review_turbo_partial('form')
+    render_review_partial('form')
   end
 
   def update
-    @review.update(review_params)
-
-    render_review_turbo_partial('show')
+    update_review_and_render('show')
   end
 
   def destroy
-    @review.destroy
-    movie = @review.movie
-    @review = Review.new(movie_id: movie.id)
-
-    render_review_turbo_partial('form')
+    destroy_review_and_render_form_partial
   end
 
   private
@@ -37,7 +30,30 @@ class ReviewsController < ApplicationController
     @review = Review.find(params[:id])
   end
 
-  def render_review_turbo_partial(partial)
+  def build_review
+    review = Review.new(review_params)
+    review.user = User.find_by_id(1)
+    review
+  end
+
+  def save_review_and_render_partial(partial)
+    @review.save
+    render_review_partial(partial)
+  end
+
+  def update_review_and_render(partial)
+    @review.update(review_params)
+    render_review_partial(partial)
+  end
+
+  def destroy_review_and_render_form_partial
+    movie_id = @review.movie.id
+    @review.destroy
+    @review = Review.new(movie_id: movie_id)
+    render_review_partial('form')
+  end
+
+  def render_review_partial(partial)
     render turbo_stream: turbo_stream.replace(
       'current-user-review',
       partial: "reviews/#{partial}",

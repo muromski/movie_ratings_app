@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Movie < ApplicationRecord
   validates :title, :director, :release_year, :genre, :description, presence: true
 
@@ -15,6 +17,6 @@ class Movie < ApplicationRecord
   end
 
   def broadcast_replaces
-    broadcast_replace(target: "movie-full-rating", partial: 'movies/movie_rating')
+    broadcast_replace(target: 'movie-full-rating', partial: 'movies/movie_rating')
   end
 end
