@@ -4,7 +4,7 @@
       <%= simple_form_for review do |f| %>
         <%= f.hidden_field :movie_id, value: review.movie_id %>
         <div class="mb-3">
-            <div class="stars-row" data-action="mouseout->stars#ratingHoveredOut" data-controller="stars" data-target="stars.starsContainer">
+            <div class="stars-row" data-action="mouseout->stars#ratingHoveredOut" data-target="stars.starsContainer">
               <input type="hidden" name="review[rating]" data-stars-target="input">
               <div class="star" data-stars-target="star" data-action="mouseover->stars#starHovered click->stars#starClicked" data-star-value="1"></div>
               <div class="star" data-stars-target="star" data-action="mouseover->stars#starHovered click->stars#starClicked" data-star-value="2"></div>
@@ -17,7 +17,7 @@
         <%= f.text_area :comment, class: "form-control", rows: 4, placeholder: "Your review..." %>
 
         <div class="mt-3 d-flex justify-content-end align-items-end">
-          <%= f.submit "Submit", class: "btn btn-primary", data: { 'target': 'stars.submitButton', 'disable-with': 'Submitting...' } %>
+          <%= f.submit "Submit", class: "btn btn-primary", data: { "stars-target": "submitButton" } %>
         </div>
       <% end %>
     </div>

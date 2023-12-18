@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = ["input", "star"];
+  static targets = ["input", "star", "submitButton"];
 
   connect() {
     this.currentRating = this.inputTarget.value || 0;
@@ -20,9 +20,7 @@ export default class extends Controller {
     this.starTargets.forEach((star, index) => {
       star.classList.toggle('active', index + 1 <= rating);
     });
-
-    const submitButton = this.inputTarget.form.querySelector("[type=submit]");
-    submitButton.disabled = rating === 0;
+    this.submitButtonTarget.disabled = rating === 0;
   }
 
   starHovered(event) {
